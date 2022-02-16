@@ -70,6 +70,8 @@ class Zn:
         gcd,x,y = gcdxy(self.rep, self.mod)
         return self.__class__(x, self.mod)
         
+# =============================================================================    
+    
     def soma(self, other):
         """
         Permite somar duas instâncias módulo N.
@@ -77,11 +79,6 @@ class Zn:
         if not isinstance(other, self.__class__):
             raise TypeError("Só podemos somar duas instâncias da mesma classe.")
         return self.__class__(self.rep + other.rep, self.mod)
-    
-    def __add__(self,other):
-        """
-        """
-        return self.soma(other)
     
     def produto(self, other):
         """
@@ -93,7 +90,28 @@ class Zn:
                     )
         return self.__class__(self.rep * other.rep, self.mod)
     
+    def equals(self,other):
+        """
+        Permite comparar duas instâncias módulo N e verificar se são iguais
+        """
+        if self.mod == other.mod:
+            if (self.rep-other.rep)%self.mod == 0:
+                return True
+        return False
+    
+# =============================================================================
+    
+    def __add__(self,other):
+        """
+        """
+        return self.soma(other)
+    
     def __mul__(self,other):
         """
         """
         return self.produto(other)
+    
+    def __eq__(self, other):
+        """
+        """
+        return self.equals(other)
